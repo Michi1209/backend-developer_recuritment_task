@@ -11,14 +11,14 @@ export class UsersService {
           nickname: "luigi",
           full_name: "Luigi Rossi",
           email: "luigi@rossi.com",
-          role: Role.Admin,
+          role: [Role.Admin],
         },
         {
           userId: 1,
           nickname: "klausi",
           full_name: "Klaus Stublum",
           email: "klaus.stublum@mail.com",
-          role: Role.User,
+          role: [Role.User],
         },
       ];
     
