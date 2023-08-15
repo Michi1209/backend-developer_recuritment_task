@@ -9,27 +9,24 @@ import {
 } from '@nestjs/common';
 
 import { FileInterceptor } from '@nestjs/platform-express';
-import { ResizeImagePipe } from './sharppipe.pipe';
+import { ResizeImagePipe } from './resize.pipe';
 import { FileEntity } from './file.entity';
+import { FileService } from './file.service';
 
 @Controller('file')
 export class FileController {
 
+  constructor(private readonly fileService: FileService) {}
 
     @Post('upload')
     @UseInterceptors(FileInterceptor('file'))
     uploadFileAndPassValidation(
         @Body() body: FileEntity,
         @UploadedFile(
-            new ParseFilePipeBuilder()
-            .addFileTypeValidator({
-              fileType: 'jpg',
-            })
-            .build(),
             ResizeImagePipe
         )
         file: Express.Multer.File,) {
-        console.log(file);
+        this.fileService.upload(file);
     }
 
 }
