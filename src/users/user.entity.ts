@@ -7,5 +7,5 @@ export class User {
     full_name: string;
     email: string;
     role: Role[];
-
+    password?: string;
 }

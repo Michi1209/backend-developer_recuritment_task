@@ -12,6 +12,7 @@ export class UsersService {
           full_name: "Luigi Rossi",
           email: "luigi@rossi.com",
           role: [Role.Admin],
+          password: "changeme"
         },
         {
           userId: 1,
@@ -19,6 +20,7 @@ export class UsersService {
           full_name: "Klaus Stublum",
           email: "klaus.stublum@mail.com",
           role: [Role.User],
+          password: "weakpw"
         },
       ];
     
