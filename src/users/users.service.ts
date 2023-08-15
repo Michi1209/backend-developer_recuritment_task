@@ -1,18 +1,20 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { User } from './user.entity';
 import { Role } from 'src/roles/role.enum';
+import { FileEntity } from 'src/file/file.entity';
 
 @Injectable()
 export class UsersService {
     
-    private readonly users = [
+    private users : User[] = [
         {
           userId: 1,
           nickname: "luigi",
           full_name: "Luigi Rossi",
           email: "luigi@rossi.com",
           roles: [Role.Admin],
-          password: "changeme"
+          password: "changeme",
+          picture: new FileEntity("nopic")
         },
         {
           userId: 2,
@@ -20,7 +22,8 @@ export class UsersService {
           full_name: "Klaus Stublum",
           email: "klaus.stublum@mail.com",
           roles: [Role.User],
-          password: "weakpw"
+          password: "weakpw",
+          picture: new FileEntity("nopic")
         },
       ];
     
@@ -35,4 +38,13 @@ export class UsersService {
       findAll(): User[] | PromiseLike<User[]> {
           return this.users;
       } 
+      
+      createUser(user: User) {
+        this.users.push(user);
+      }
+
+      updateUser(user: User) {
+          const updateIdx = this.users.findIndex(u => u.userId === user.userId);
+          this.users[updateIdx] = user;
+      }
 }
