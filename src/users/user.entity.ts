@@ -1,3 +1,4 @@
+import { FileEntity } from "src/file/file.entity";
 import { Role } from "src/roles/role.enum";
 
 export class User {
@@ -8,4 +9,5 @@ export class User {
     email: string;
     role: Role[];
     password?: string;
+    picture?: FileEntity;
 }
