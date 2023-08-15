@@ -3,7 +3,7 @@ import { User } from './user.entity';
 import { Role } from 'src/roles/role.enum';
 
 @Injectable()
-export class UsersService { 
+export class UsersService {
     
     private readonly users = [
         {
@@ -25,4 +25,8 @@ export class UsersService {
       async findOne(email: string): Promise<User | undefined> {
         return this.users.find(user => user.email === email);
       }
+
+      findAll(): User[] | PromiseLike<User[]> {
+          return this.users;
+      } 
 }
