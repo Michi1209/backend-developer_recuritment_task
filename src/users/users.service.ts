@@ -11,21 +11,25 @@ export class UsersService {
           nickname: "luigi",
           full_name: "Luigi Rossi",
           email: "luigi@rossi.com",
-          role: [Role.Admin],
+          roles: [Role.Admin],
           password: "changeme"
         },
         {
-          userId: 1,
+          userId: 2,
           nickname: "klausi",
           full_name: "Klaus Stublum",
           email: "klaus.stublum@mail.com",
-          role: [Role.User],
+          roles: [Role.User],
           password: "weakpw"
         },
       ];
     
       async findOne(email: string): Promise<User | undefined> {
         return this.users.find(user => user.email === email);
+      }
+
+      findById(id: number): User | undefined  {
+        return this.users.find(user => user.userId === id);
       }
 
       findAll(): User[] | PromiseLike<User[]> {

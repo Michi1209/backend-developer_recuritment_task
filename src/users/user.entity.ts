@@ -7,7 +7,7 @@ export class User {
     nickname: string;
     full_name: string;
     email: string;
-    role: Role[];
+    roles: Role[];
     password?: string;
     picture?: FileEntity;
 }
