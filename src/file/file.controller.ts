@@ -1,6 +1,7 @@
 import {
     Body,
     Controller,
+    Get,
     Param,
     ParseFilePipe,
     ParseFilePipeBuilder,
@@ -22,6 +23,7 @@ import { Role } from 'src/roles/role.enum';
 import { UsersService } from 'src/users/users.service';
 import { Roles } from 'src/roles/roles.decorator';
 import { RolesGuard } from 'src/roles/roles.guard';
+import { User } from 'src/users/user.entity';
 
 @Controller('file')
 export class FileController {
@@ -37,10 +39,18 @@ export class FileController {
         @UploadedFile(
             ResizeImagePipe
         )
-        file: Express.Multer.File,@Request() req) {
+        file: string,@Request() req) {
             
-        this.fileService.upload(file,req.user);
+        const user=this.userService.findById(req.user.userId);
+        this.fileService.upload(file,user);
        
+    }
+
+    
+    @Get(':id')
+    async findById(@Param('id',ParseIntPipe)
+    id: number,): Promise<User> {
+      return this.userService.findById(id);
     }
 
     @Post('upload/:id')
@@ -53,9 +63,9 @@ export class FileController {
         @UploadedFile(
             ResizeImagePipe
         )
-        file: Express.Multer.File,@Request() req) {
+        file: string,@Request() req) {
         const user=this.userService.findById(id);
         this.fileService.upload(file,user);
-        return "changed"
+        return "admin changed profile pic for "+ user.email;
     }
 }

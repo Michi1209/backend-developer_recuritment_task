@@ -1,3 +1,6 @@
 export class FileEntity {
-    path:string;
+    path: string
+    constructor(path: string){
+        this.path = path;
+    }
 }
